@@ -57,6 +57,10 @@ RSpec.describe Reek::Source::SourceCode do
       message = "Source '#{source_name}' can not be processed by Reek due to an encoding error in the source file."
       expect { src.syntax_tree }.to raise_error.with_message(/#{message}/)
     end
+
+    it 'shows the original exception class' do
+      expect { src.syntax_tree }.to raise_error.with_message(/InvalidByteSequenceError/)
+    end
   end
 
   context 'when the parser fails' do
